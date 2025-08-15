@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бюджет США</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Верхняя панель (HUD) -->
+    <div class="hud-panel">
+      <img src="img/hud.png" class="hud-img" />
+      <div class="hud-items-container">
+        <!-- Новый контейнер для распределения -->
+        <div class="hud-item" data-tooltip="Budget">
+          <div class="value" id="budget-value">$5.00T</div>
+        </div>
+        <div class="hud-item" data-tooltip="GDP">
+          <div class="value" id="gdp-value">$25.00T</div>
+        </div>
+        <div class="hud-item" data-tooltip="Public Opinion">
+          <div class="value" id="opinion-value">%30.00</div>
+        </div>
+        <div class="hud-item" data-tooltip="National Debt">
+          <div class="value" id="debt-value">$30.00T</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Центральная панель с блоками бюджета -->
+    <div class="budget-panel">
+      <!-- Defense -->
+      <div class="budget-block defense">
+        <div class="block-icon"></div>
+        <div class="block-title">Defense</div>
+        <img src="img/def.jpg" class="main-img" />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="20"
+          class="budget-slider"
+        />
+        <div class="slider-value">20%</div>
+        <div class="tooltip">Defense and military expenditure</div>
+      </div>
+
+      <!-- Healthcare -->
+      <div class="budget-block healthcare">
+        <div class="block-icon"></div>
+        <div class="block-title">Healthcare</div>
+        <img src="img/health.png" class="main-img" />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="20"
+          class="budget-slider"
+        />
+        <div class="slider-value">20%</div>
+        <div class="tooltip">Health and medical expenses</div>
+      </div>
+
+      <!-- Education -->
+      <div class="budget-block education">
+        <div class="block-icon"></div>
+        <div class="block-title">Education</div>
+        <img src="img/education.png" class="main-img" />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="20"
+          class="budget-slider"
+        />
+        <div class="slider-value">20%</div>
+        <div class="tooltip">Expenditures on education and science</div>
+      </div>
+
+      <!-- Infrastructure -->
+      <div class="budget-block infrastructure">
+        <div class="block-icon"></div>
+        <div class="block-title">Infrastructure</div>
+        <img src="img/infrastructure.png" class="main-img" />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="20"
+          class="budget-slider"
+        />
+        <div class="slider-value">20%</div>
+        <div class="tooltip">Infrastructure and construction costs</div>
+      </div>
+
+      <!-- Tax Incentives -->
+      <div class="budget-block tax">
+        <div class="block-icon"></div>
+        <div class="block-title">Tax Incentives</div>
+        <img src="img/tax.png" class="main-img" />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="20"
+          class="budget-slider"
+        />
+        <div class="slider-value">20%</div>
+        <div class="tooltip">Tax breaks and incentives</div>
+      </div>
+    </div>
+
+    <!-- Нижняя панель событий -->
+    <div class="events-panel">
+      <div class="event-card" data-tooltip="Financial Crisis 2008">
+        <img src="img/crisis.png" class="event-icon" />
+        <div class="event-title">Financial Crisis 2008</div>
+      </div>
+      <div class="event-card" data-tooltip="Pandemic COVID-19">
+        <img class="event-icon" src="img/pandemic.png" />
+        <div class="event-title">Pandemic COVID-19</div>
+      </div>
+      <div class="event-card" data-tooltip="Oil Price Surge">
+        <img class="event-icon" src="img/oil.png" />
+        <div class="event-title">Oil Price Surge</div>
+      </div>
+    </div>
+
+    <!-- Здесь будет фон -->
+    <!-- ЗАМЕНИТЕ НА СВОЙ ФОН -->
+    <div class="background">
+      <img src="img/bg3.jpg" alt="Фон сайта" id="site-background" />
+    </div>
+
+    <!-- Попап -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <div class="popup-title" id="popup-title">Event</div>
+        <div class="popup-message" id="popup-message"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

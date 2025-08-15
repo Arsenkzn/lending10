@@ -1,0 +1,488 @@
+/* Основные стили */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  cursor: url("img/cursor3.png"), auto; /* ЗАМЕНИТЕ НА СВОЙ КУРСОР */
+}
+
+/* Фон */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Основное свойство для правильного отображения */
+}
+
+/* Верхняя панель (HUD) */
+.hud-panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.hud-item .icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.hud-item .label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.hud-panel {
+  position: relative; /* Делаем контейнер относительным для позиционирования дочерних элементов */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+}
+
+.hud-items-container {
+  margin-left: 10px;
+  position: absolute; /* Размещаем поверх изображения */
+  bottom: 1px; /* Отступ от нижнего края */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center; /* Равномерное распределение */
+  gap: 0px; /* Расстояние между элементами */
+}
+
+.budget-slider {
+  cursor: url("img/cursor3.png"), auto;
+  background: linear-gradient(90deg, #ffcc00, #ff6b00);
+  width: 100%;
+  height: 60px; /* Толщина ползунка */
+  margin: 20px 0;
+  border-radius: 35px; /* Закругленные края */
+  outline: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для объема */
+}
+
+/* Стиль "бегунка" (ползунка) */
+.budget-slider::-webkit-slider-thumb {
+  cursor: url("img/cursor3.png"), auto;
+  width: 60px; /* Ширина бегунка */
+  height: 40px; /* Высота бегунка */
+  background: #ff6b00; /* Оранжевый цвет */
+  border-radius: 50%; /* Круглая форма */
+  cursor: pointer;
+  border: 4px solid white; /* Белая обводка */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Для Firefox */
+.budget-slider::-moz-range-thumb {
+  width: 40px;
+  cursor: url("img/cursor3.png"), auto;
+  height: 40px;
+  background: #ff6b00;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимация при наведении */
+.budget-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  background: #ff4500;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.hud-img {
+  display: block;
+  border-radius: 45px;
+  z-index: 1;
+  /* Дополнительные стили для изображения, если нужно */
+}
+
+.hud-item {
+  position: absolute; /* Абсолютное позиционирование для значений */
+  bottom: 0; /* Размещаем у нижнего края изображения */
+}
+
+.hud-item .value {
+  font-size: 50px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#budget-value {
+  left: 0%; /* Примерное положение - можно настроить точнее */
+}
+
+#gdp-value {
+  left: 35%;
+}
+
+#opinion-value {
+  left: 65%;
+}
+
+#debt-value {
+  left: 80%;
+}
+
+/* Центральная панель бюджета */
+.budget-panel {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px 20px;
+}
+
+.budget-block {
+  position: relative; /* Для позиционирования дочерних элементов */
+  width: 15%;
+  height: 100%;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Обрезаем выходящие за границы элементы */
+
+  /* Flex-контейнер с колонной */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Распределяем пространство между элементами */
+  align-items: center; /* Центрируем по горизонтали */
+  padding: 20px 0; /* Отступы сверху и снизу */
+}
+
+/* Стили для фонового изображения */
+.budget-block .main-img {
+  top: 0;
+  left: 0;
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Заполняем блок с сохранением пропорций */
+}
+
+/* Затемнение фона для лучшей читаемости текста */
+.budget-block::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Полупрозрачный черный */
+  z-index: -1; /* Между фоном и контентом */
+}
+
+/* Все остальные элементы должны быть выше изображения */
+.budget-block > *:not(.main-img) {
+  position: relative;
+  z-index: 2;
+}
+
+.budget-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Цвета блоков */
+.defense {
+  background-color: #4a90e2; /* синий */
+  border: 3px solid #2a70c0;
+}
+
+.healthcare {
+  background-color: #e94a4a; /* красный */
+  border: 3px solid #c02a2a;
+}
+
+.education {
+  background-color: #f5d547; /* желтый */
+  border: 3px solid #d5b52a;
+}
+
+.infrastructure {
+  background-color: #f5a623; /* оранжевый */
+  border: 3px solid #d58a1a;
+}
+
+.tax {
+  background-color: #7ed321; /* зеленый */
+  border: 3px solid #5eb315;
+}
+
+/* Элементы блоков бюджета */
+.block-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.block-title {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 55px;
+}
+
+.budget-slider {
+  width: 100%;
+  margin: 15px 0;
+  height: 40px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.6);
+  outline: auto;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+/* Стилизация слайдеров для разных блоков */
+.defense .budget-slider::-webkit-slider-thumb {
+  background: #2a70c0;
+}
+
+.healthcare .budget-slider::-webkit-slider-thumb {
+  background: #c02a2a;
+}
+
+.education .budget-slider::-webkit-slider-thumb {
+  background: #d5b52a;
+}
+
+.infrastructure .budget-slider::-webkit-slider-thumb {
+  background: #d58a1a;
+}
+
+.tax .budget-slider::-webkit-slider-thumb {
+  background: #5eb315;
+}
+
+.budget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.slider-value {
+  font-weight: bold;
+  font-size: 46px;
+}
+
+/* Нижняя панель событий */
+.events-panel {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.event-title {
+  display: none;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.main-img {
+  width: 500px;
+  height: 750px;
+}
+
+.event-card::after {
+  font-size: 50px;
+  width: auto;
+  height: auto;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.event-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: #333;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+.event-icon {
+  width: 230px;
+  height: 290px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  cursor: url("img/cursor3.png"), auto;
+}
+
+/* Tooltip стили */
+[data-tooltip] {
+  position: relative;
+  margin-bottom: 70px;
+  z-index: 1;
+}
+
+[data-tooltip-main] {
+  position: relative;
+  margin-bottom: 70px;
+  z-index: 1;
+}
+
+[data-tooltip-main]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 34px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+}
+
+[data-tooltip-main]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 34px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.budget-block .tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+}
+
+.budget-block:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Стили для попапа */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 600px;
+  width: auto;
+  height: auto;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+
+.popup-overlay.active .popup-content {
+  transform: scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.popup-close:hover {
+  color: #000;
+}
+
+.popup-title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.popup-message {
+  font-size: 40px;
+  color: red;
+  margin-bottom: 20px;
+}
