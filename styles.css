@@ -1,6 +1,6 @@
 /* Основные стили */
 html {
-  zoom: 0.65; /* Экспериментальное свойство, работает не везде */
+  zoom: 0.6; /* Экспериментальное свойство, работает не везде */
 }
 
 body {
@@ -38,7 +38,7 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 15px;
-  margin-top: 40px;
+  margin-top: 180px;
 }
 
 .hud-item {
@@ -158,7 +158,7 @@ body {
 .budget-panel {
   display: flex;
   justify-content: space-around;
-  margin: 40px 20px;
+  margin: 65px 20px;
 }
 
 .budget-block {
@@ -474,4 +474,21 @@ body {
   font-size: 40px;
   color: red;
   margin-bottom: 20px;
+}
+
+.budget-img {
+  border-radius: 15px;
+  position: relative; /* Создаем контекст для z-index */
+  z-index: 1; /* Изображение на нижнем уровне */
+}
+
+.budget-value {
+  font-size: 22px;
+  font-weight: bold;
+  position: relative; /* Или absolute, в зависимости от верстки */
+  z-index: 2; /* Должен быть ВЫШЕ чем у изображения */
+  margin-top: -55px; /* Поднимаем текст вверх */
+  text-align: center; /* Центрируем текст */
+  color: black; /* Для лучшей читаемости */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Тень для контраста */
 }

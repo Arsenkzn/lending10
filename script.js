@@ -1,14 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Получаем все элементы
-  const sliders = document.querySelectorAll(".budget-slider");
+  const budgetBlocks = document.querySelectorAll(".budget-block");
   const budgetValue = document.getElementById("budget-value");
   const gdpValue = document.getElementById("gdp-value");
   const opinionValue = document.getElementById("opinion-value");
   const debtValue = document.getElementById("debt-value");
+  const moodIcon = document.getElementById("mood-icon");
   const popup = document.getElementById("popup");
   const popupTitle = document.getElementById("popup-title");
   const popupMessage = document.getElementById("popup-message");
   const eventCards = document.querySelectorAll(".event-card");
+
+  // Инициализируем значения бюджета
+  let budgetValues = {
+    defense: 20,
+    healthcare: 20,
+    education: 20,
+    infrastructure: 20,
+    tax: 20,
+  };
+
+  // Инициализируем общие показатели
+  let totalBudget = 5000; // 5.00T в миллиардах
+  let gdp = 25000; // 25.00T
+  let publicOpinion = 30; // 30.00%
+  let nationalDebt = 30000; // 30.00T
+
+  // Функция для форматирования числа в формат с T (триллионы)
+  function formatNumber(num) {
+    if (num >= 1000) {
+      return `$${(num / 1000).toFixed(2)}T`;
+    }
+    return `$${num.toFixed(2)}B`;
+  }
+
+  // Функция обновления смайлика настроения
+  function updateMoodIcon() {
+    if (publicOpinion >= 33) {
+      moodIcon.textContent = "😊";
+      moodIcon.style.color = "green";
+    } else if (publicOpinion >= 30) {
+      moodIcon.textContent = "😐";
+      moodIcon.style.color = "yellow";
+    } else {
+      moodIcon.textContent = "😠";
+      moodIcon.style.color = "red";
+
+      // Показываем попап с жалобой, если настроение слишком низкое
+      if (publicOpinion < 26 && !popup.classList.contains("active")) {
+        showPopup(
+          "Public Opinion",
+          "What are you doing? Life has become unbearable!"
+        );
+      }
+    }
+  }
 
   // Функция показа попапа
   function showPopup(title, message) {
@@ -22,6 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
     popup.classList.remove("active");
   }
 
+  // Функция тряски экрана
+  function shakeScreen() {
+    document.body.classList.add("shake");
+    setTimeout(() => {
+      document.body.classList.remove("shake");
+    }, 500);
+  }
+
   // Закрытие по клику на крестик
   document.querySelector(".popup-close").addEventListener("click", hidePopup);
 
@@ -32,64 +86,69 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Инициализируем общий бюджет
-  let totalBudget = 5000; // 5.00T в миллиардах
-  let gdp = 25000; // 25.00T
-  let publicOpinion = 30; // 30.00T
-  let nationalDebt = 30000; // 30.00T
-
-  // Функция для форматирования числа в формат с T (триллионы)
-  function formatNumber(num) {
-    if (num >= 1000) {
-      return `$${(num / 1000).toFixed(2)}T`;
-    }
-    return `$${num.toFixed(2)}B`;
-  }
-
   // Обновляем значения на панели
   function updateHUD() {
     budgetValue.textContent = formatNumber(totalBudget);
     gdpValue.textContent = formatNumber(gdp);
-    opinionValue.textContent = publicOpinion.toFixed(2);
+    opinionValue.textContent = publicOpinion.toFixed(2) + "%";
     debtValue.textContent = formatNumber(nationalDebt);
+    updateMoodIcon();
   }
 
-  // Обработчики событий для слайдеров
-  sliders.forEach((slider) => {
-    const valueDisplay = slider.nextElementSibling;
-
-    // Устанавливаем начальное значение
-    valueDisplay.textContent = slider.value + "%";
-
-    // Обработчик изменения слайдера
-    slider.addEventListener("input", function () {
-      valueDisplay.textContent = this.value + "%";
-
-      // Пересчитываем бюджет (упрощенная логика)
-      const totalPercentage = Array.from(sliders).reduce(
-        (sum, s) => sum + parseInt(s.value),
-        0
-      );
-
-      // Нормализуем значения, чтобы сумма была 100%
-      if (totalPercentage !== 100) {
-        const ratio = 100 / totalPercentage;
-        sliders.forEach((s) => {
-          s.value = Math.round(s.value * ratio);
-          s.nextElementSibling.textContent = s.value + "%";
-        });
+  // Пересчитываем бюджет и показатели
+  function recalculateBudget() {
+    // Проверяем, что сумма равна 100%
+    const total = Object.values(budgetValues).reduce(
+      (sum, val) => sum + val,
+      0
+    );
+    if (total !== 100) {
+      const ratio = 100 / total;
+      for (const key in budgetValues) {
+        budgetValues[key] = Math.round(budgetValues[key] * ratio);
       }
+      updateSliderValues();
+    }
 
-      // Обновляем показатели (упрощенная модель)
-      totalBudget = 5000 + (Math.random() * 100 - 50);
-      gdp = 25000 + parseInt(sliders[3].value) * 50; // Инфраструктура влияет на GDP
-      publicOpinion =
-        30 +
-        (parseInt(sliders[1].value) / 10 - 2) +
-        (parseInt(sliders[2].value) / 10 - 2);
-      nationalDebt = 30000 + (5000 - totalBudget);
+    // Обновляем показатели (упрощенная модель)
+    totalBudget = 5000 + (Math.random() * 100 - 50);
+    gdp = 25000 + budgetValues.infrastructure * 50;
+    publicOpinion =
+      30 +
+      (budgetValues.healthcare / 10 - 2) +
+      (budgetValues.education / 10 - 2);
+    nationalDebt = 30000 + (5000 - totalBudget);
 
-      updateHUD();
+    updateHUD();
+  }
+
+  // Обновляем значения на слайдерах
+  function updateSliderValues() {
+    budgetBlocks.forEach((block) => {
+      const category = block.classList[1];
+      const valueDisplay = block.querySelector(".slider-value");
+      valueDisplay.textContent = budgetValues[category] + "%";
+    });
+  }
+
+  // Обработчики событий для кнопок +/-
+  budgetBlocks.forEach((block) => {
+    const category = block.classList[1];
+    const minusBtn = block.querySelector(".minus");
+    const plusBtn = block.querySelector(".plus");
+
+    minusBtn.addEventListener("click", () => {
+      if (budgetValues[category] > 0) {
+        budgetValues[category] -= 5;
+        recalculateBudget();
+      }
+    });
+
+    plusBtn.addEventListener("click", () => {
+      if (budgetValues[category] < 100) {
+        budgetValues[category] += 5;
+        recalculateBudget();
+      }
     });
   });
 
@@ -97,6 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
   eventCards.forEach((card) => {
     card.addEventListener("click", function () {
       const eventTitle = this.querySelector(".event-title").textContent;
+
+      // Трясем экран
+      shakeScreen();
 
       // Создаем разные сообщения для разных событий
       let message = "";
@@ -115,17 +177,19 @@ document.addEventListener("DOMContentLoaded", function () {
           message = "Event activated!";
       }
 
-      showPopup(eventTitle, message);
+      // Показываем попап через небольшой таймаут для синхронизации с анимацией
+      setTimeout(() => {
+        showPopup(eventTitle, message);
+      }, 300);
 
-      // Пример влияния события на бюджет (оставьте вашу существующую логику)
+      // Влияние события на бюджет
       if (eventTitle === "Financial Crisis 2008") {
         totalBudget -= 1000;
         gdp -= 5000;
         publicOpinion -= 5;
         nationalDebt += 2000;
       } else if (eventTitle === "Pandemic COVID-19") {
-        sliders[1].value = Math.min(100, parseInt(sliders[1].value) + 15);
-        sliders[1].nextElementSibling.textContent = sliders[1].value + "%";
+        budgetValues.healthcare = Math.min(100, budgetValues.healthcare + 15);
         totalBudget += 500;
         nationalDebt += 1000;
       } else if (eventTitle === "Oil Price Surge") {
@@ -134,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       updateHUD();
+      updateSliderValues();
     });
   });
 
