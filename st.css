@@ -150,7 +150,16 @@ body {
   position: relative; /* или absolute в зависимости от контекста */
   margin: 0 auto; /* центрирование по горизонтали */
   top: 10px; /* опускаем на 10px вниз */
-  transform: translateY(220px); /* альтернативный вариант опускания */
+  transform: translateY(465px); /* альтернативный вариант опускания */
+}
+
+.sk-external-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60px;
+  right: 0;
+  bottom: 0;
 }
 
 /* Цвета блоков */
