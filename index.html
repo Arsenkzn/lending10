@@ -4,29 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Бюджет США</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.png" />
+    <link rel="stylesheet" href="st.css" />
   </head>
   <body>
-    <!-- Верхняя панель (HUD) -->
-    <div class="hud-panel">
-      <img src="img/hud.jpg" class="hud-img" />
-      <div class="hud-items-container">
-        <!-- Новый контейнер для распределения -->
-        <div class="hud-item" data-tooltip="Budget">
-          <div class="value" id="budget-value">$5.00T</div>
-        </div>
-        <div class="hud-item" data-tooltip="GDP">
-          <div class="value" id="gdp-value">$25.00T</div>
-        </div>
-        <div class="hud-item" data-tooltip="Public Opinion">
-          <div class="value" id="opinion-value">%30.00</div>
-        </div>
-        <div class="hud-item" data-tooltip="National Debt">
-          <div class="value" id="debt-value">$30.00T</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Центральная панель с блоками бюджета -->
     <div class="budget-panel">
       <!-- Defense -->
@@ -34,14 +15,11 @@
         <div class="block-icon"></div>
         <div class="block-title">Defense</div>
         <img src="img/def.jpg" width="100" height="auto" class="main-img" />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="20"
-          class="budget-slider"
-        />
-        <div class="slider-value">20%</div>
+        <div class="slider-controls">
+          <button class="slider-btn minus">-</button>
+          <div class="slider-value">20%</div>
+          <button class="slider-btn plus">+</button>
+        </div>
         <div class="tooltip">Defense and military expenditure</div>
       </div>
 
@@ -50,14 +28,11 @@
         <div class="block-icon"></div>
         <div class="block-title">Healthcare</div>
         <img src="img/health2.jpg" width="100" height="auto" class="main-img" />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="20"
-          class="budget-slider"
-        />
-        <div class="slider-value">20%</div>
+        <div class="slider-controls">
+          <button class="slider-btn minus">-</button>
+          <div class="slider-value">20%</div>
+          <button class="slider-btn plus">+</button>
+        </div>
         <div class="tooltip">Health and medical expenses</div>
       </div>
 
@@ -66,19 +41,16 @@
         <div class="block-icon"></div>
         <div class="block-title">Education</div>
         <img
-          src="img/education.png"
+          src="img/education.jpg"
           width="100"
           height="auto"
           class="main-img"
         />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="20"
-          class="budget-slider"
-        />
-        <div class="slider-value">20%</div>
+        <div class="slider-controls">
+          <button class="slider-btn minus">-</button>
+          <div class="slider-value">20%</div>
+          <button class="slider-btn plus">+</button>
+        </div>
         <div class="tooltip">Expenditures on education and science</div>
       </div>
 
@@ -92,14 +64,11 @@
           height="auto"
           class="main-img"
         />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="20"
-          class="budget-slider"
-        />
-        <div class="slider-value">20%</div>
+        <div class="slider-controls">
+          <button class="slider-btn minus">-</button>
+          <div class="slider-value">20%</div>
+          <button class="slider-btn plus">+</button>
+        </div>
         <div class="tooltip">Infrastructure and construction costs</div>
       </div>
 
@@ -107,21 +76,42 @@
       <div class="budget-block tax">
         <div class="block-icon"></div>
         <div class="block-title">Tax Incentives</div>
-        <img src="img/tax.png" width="100" height="auto" class="main-img" />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="20"
-          class="budget-slider"
-        />
-        <div class="slider-value">20%</div>
+        <img src="img/tax.jpg" width="100" height="auto" class="main-img" />
+        <div class="slider-controls">
+          <button class="slider-btn minus">-</button>
+          <div class="slider-value">20%</div>
+          <button class="slider-btn plus">+</button>
+        </div>
         <div class="tooltip">Tax breaks and incentives</div>
       </div>
     </div>
 
+    <div class="hud-panel">
+      <img src="img/hud2.jpg" class="hud-img" />
+      <div class="hud-items-container">
+        <div class="hud-item" data-tooltip="GDP">
+          <div class="value" id="gdp-value">$25.00T</div>
+        </div>
+        <div class="hud-item" data-tooltip="Public Opinion">
+          <div class="value" id="opinion-value">%30.00</div>
+          <div class="mood-icon" id="mood-icon">😐</div>
+        </div>
+        <div class="hud-item" data-tooltip="National Debt">
+          <div class="value" id="debt-value">$30.00T</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://x.com" target="_blank" class="sk-external-link">
+      <img src="./img/btnX.png" alt="External Link" class="sk-external-btn" />
+    </a>
+
     <!-- Нижняя панель событий -->
     <div class="events-panel">
+      <div class="hud-item" data-tooltip="Budget">
+        <img src="img/budget.jpg" class="budget-img" />
+        <div class="budget-value" id="budget-value">$5.00T</div>
+      </div>
       <div class="event-card" data-tooltip="Financial Crisis 2008">
         <img src="img/crisis.png" class="event-icon" />
         <div class="event-title">Financial Crisis 2008</div>
@@ -136,11 +126,9 @@
       </div>
     </div>
 
-    <!-- Здесь будет фон -->
-
-    <!-- ЗАМЕНИТЕ НА СВОЙ ФОН -->
+    <!-- Фон -->
     <div class="background">
-      <img src="img/bg3.png" alt="Фон сайта" id="site-background" />
+      <img src="img/bg.jpg" alt="Фон сайта" id="site-background" />
     </div>
 
     <!-- Попап -->
