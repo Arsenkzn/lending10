@@ -1,10 +1,17 @@
 /* Основные стили */
+html {
+  zoom: 0.25; /* Экспериментальное свойство, работает не везде */
+}
+
 body {
   margin: 0;
   padding: 0;
+  width: 100%; /* 25% от ширины viewport */
   font-family: "Comic Sans MS", cursive, sans-serif;
   overflow: hidden;
   height: 100vh;
+  left: 0;
+  right: 0;
   cursor: url("img/cursor3.png"), auto; /* ЗАМЕНИТЕ НА СВОЙ КУРСОР */
 }
 
