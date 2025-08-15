@@ -1,6 +1,6 @@
 /* Основные стили */
 html {
-  zoom: 0.25; /* Экспериментальное свойство, работает не везде */
+  zoom: 0.5; /* Экспериментальное свойство, работает не везде */
 }
 
 body {
@@ -73,8 +73,7 @@ body {
   left: 0;
   right: 0;
   display: flex;
-  justify-content: center; /* Равномерное распределение */
-  gap: 0px; /* Расстояние между элементами */
+  justify-content: center;
 }
 
 .budget-slider {
@@ -121,20 +120,22 @@ body {
 
 .hud-img {
   display: block;
-  border-radius: 45px;
+  border-radius: 15px;
   z-index: 1;
   /* Дополнительные стили для изображения, если нужно */
 }
 
 .hud-item {
   position: absolute; /* Абсолютное позиционирование для значений */
-  bottom: 0; /* Размещаем у нижнего края изображения */
+  bottom: 0;
+  margin: 0 -10px; /* Размещаем у нижнего края изображения */
 }
 
 .hud-item .value {
-  font-size: 50px;
+  font-size: 20px;
   font-weight: bold;
   white-space: nowrap;
+  padding-bottom: 30px;
 }
 
 #budget-value {
@@ -162,18 +163,14 @@ body {
 
 .budget-block {
   position: relative; /* Для позиционирования дочерних элементов */
-  width: 15%;
-  height: 100%;
+  width: 340px;
+  height: 350px;
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden; /* Обрезаем выходящие за границы элементы */
-
-  /* Flex-контейнер с колонной */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Распределяем пространство между элементами */
   align-items: center; /* Центрируем по горизонтали */
-  padding: 20px 0; /* Отступы сверху и снизу */
 }
 
 /* Стили для фонового изображения */
@@ -244,7 +241,7 @@ body {
 .block-title {
   font-weight: bold;
   margin-bottom: 15px;
-  font-size: 55px;
+  font-size: 45px;
 }
 
 .budget-slider {
@@ -297,7 +294,7 @@ body {
 .events-panel {
   display: flex;
   justify-content: space-around;
-  margin: 20px;
+  margin: 10px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -317,10 +314,10 @@ body {
 
 .event-card::after {
   font-size: 50px;
-  width: auto;
-  height: auto;
+  width: 130px;
+  height: 200px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   color: #333;
   cursor: url("img/cursor3.png"), auto;
 }
@@ -333,8 +330,8 @@ body {
 }
 
 .event-icon {
-  width: 230px;
-  height: 290px;
+  width: 130px;
+  height: 200px;
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -346,38 +343,7 @@ body {
 /* Tooltip стили */
 [data-tooltip] {
   position: relative;
-  margin-bottom: 70px;
   z-index: 1;
-}
-
-[data-tooltip-main] {
-  position: relative;
-  margin-bottom: 70px;
-  z-index: 1;
-}
-
-[data-tooltip-main]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 34px;
-  white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index: 10;
-}
-
-[data-tooltip-main]:hover::after {
-  opacity: 1;
-  visibility: visible;
 }
 
 [data-tooltip]::after {
@@ -390,13 +356,15 @@ body {
   color: #333;
   padding: 8px 12px;
   border-radius: 10px;
-  font-size: 34px;
+  font-size: 24px;
   white-space: nowrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
   z-index: 10;
+  width: max-content;
+  height: auto;
 }
 
 [data-tooltip]:hover::after {
@@ -404,22 +372,36 @@ body {
   visibility: visible;
 }
 
-.budget-block .tooltip {
+/* Стили для тултипа */
+.tooltip {
   position: absolute;
-  bottom: calc(100% + 10px);
+  bottom: 170%; /* Позиционируем над блоком */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Центрируем по горизонтали */
+
+  /* Ширина по содержимому */
+  width: max-content;
+  max-width: 500px; /* Ограничение максимальной ширины */
+  white-space: nowrap; /* Текст в одну строку */
+
+  /* Стили оформления */
   background-color: rgba(255, 255, 255, 0.9);
   color: #333;
   padding: 8px 12px;
   border-radius: 10px;
-  font-size: 14px;
-  white-space: nowrap;
+  font-size: 22px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* Анимация появления */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
+
+  /* Расположение над другими элементами */
   z-index: 10;
+
+  /* Чтобы не мешал взаимодействию */
+  pointer-events: none;
 }
 
 .budget-block:hover .tooltip {
