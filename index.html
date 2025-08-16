@@ -9,80 +9,101 @@
   </head>
   <body>
     <!-- Центральная панель с блоками бюджета -->
-    <div class="budget-panel">
-      <!-- Defense -->
-      <div class="budget-block defense">
-        <div class="block-icon"></div>
-        <div class="block-title">Defense</div>
-        <img src="img/def.jpg" width="100" height="auto" class="main-img" />
-        <div class="slider-controls">
-          <button class="slider-btn minus">-</button>
-          <div class="slider-value">20%</div>
-          <button class="slider-btn plus">+</button>
+    <div class="header-panel">
+      <div>
+        <h2 class="panel-h2">BUDGET DISTRIBUTION PANEL</h2>
+        <div class="budget-panel">
+          <div class="budget-block defense">
+            <div class="block-icon"></div>
+            <div class="block-title">Defense</div>
+            <img src="img/def.jpg" width="100" height="auto" class="main-img" />
+            <div class="slider-controls">
+              <button class="slider-btn minus">-</button>
+              <div class="slider-value">20%</div>
+              <button class="slider-btn plus">+</button>
+            </div>
+            <div class="tooltip">Defense and military expenditure</div>
+          </div>
+
+          <!-- Healthcare -->
+          <div class="budget-block healthcare">
+            <div class="block-icon"></div>
+            <div class="block-title">Healthcare</div>
+            <img
+              src="img/health2.jpg"
+              width="100"
+              height="auto"
+              class="main-img"
+            />
+            <div class="slider-controls">
+              <button class="slider-btn minus">-</button>
+              <div class="slider-value">20%</div>
+              <button class="slider-btn plus">+</button>
+            </div>
+            <div class="tooltip">Health and medical expenses</div>
+          </div>
+
+          <!-- Education -->
+          <div class="budget-block education">
+            <div class="block-icon"></div>
+            <div class="block-title">Education</div>
+            <img
+              src="img/education.jpg"
+              width="100"
+              height="auto"
+              class="main-img"
+            />
+            <div class="slider-controls">
+              <button class="slider-btn minus">-</button>
+              <div class="slider-value">20%</div>
+              <button class="slider-btn plus">+</button>
+            </div>
+            <div class="tooltip">Expenditures on education and science</div>
+          </div>
+
+          <!-- Infrastructure -->
+          <div class="budget-block infrastructure">
+            <div class="block-icon"></div>
+            <div class="block-title">Infrastructure</div>
+            <img
+              src="img/infrastructure.png"
+              width="100"
+              height="auto"
+              class="main-img"
+            />
+            <div class="slider-controls">
+              <button class="slider-btn minus">-</button>
+              <div class="slider-value">20%</div>
+              <button class="slider-btn plus">+</button>
+            </div>
+            <div class="tooltip">Infrastructure and construction costs</div>
+          </div>
+
+          <!-- Tax Incentives -->
+          <div class="budget-block tax">
+            <div class="block-icon"></div>
+            <div class="block-title">Tax Incentives</div>
+            <img src="img/tax.jpg" width="100" height="auto" class="main-img" />
+            <div class="slider-controls">
+              <button class="slider-btn minus">-</button>
+              <div class="slider-value">20%</div>
+              <button class="slider-btn plus">+</button>
+            </div>
+            <div class="tooltip">Tax breaks and incentives</div>
+          </div>
         </div>
-        <div class="tooltip">Defense and military expenditure</div>
       </div>
 
-      <!-- Healthcare -->
-      <div class="budget-block healthcare">
-        <div class="block-icon"></div>
-        <div class="block-title">Healthcare</div>
-        <img src="img/health2.jpg" width="100" height="auto" class="main-img" />
-        <div class="slider-controls">
-          <button class="slider-btn minus">-</button>
-          <div class="slider-value">20%</div>
-          <button class="slider-btn plus">+</button>
-        </div>
-        <div class="tooltip">Health and medical expenses</div>
-      </div>
-
-      <!-- Education -->
-      <div class="budget-block education">
-        <div class="block-icon"></div>
-        <div class="block-title">Education</div>
-        <img
-          src="img/education.jpg"
-          width="100"
-          height="auto"
-          class="main-img"
-        />
-        <div class="slider-controls">
-          <button class="slider-btn minus">-</button>
-          <div class="slider-value">20%</div>
-          <button class="slider-btn plus">+</button>
-        </div>
-        <div class="tooltip">Expenditures on education and science</div>
-      </div>
-
-      <!-- Infrastructure -->
-      <div class="budget-block infrastructure">
-        <div class="block-icon"></div>
-        <div class="block-title">Infrastructure</div>
-        <img
-          src="img/infrastructure.png"
-          width="100"
-          height="auto"
-          class="main-img"
-        />
-        <div class="slider-controls">
-          <button class="slider-btn minus">-</button>
-          <div class="slider-value">20%</div>
-          <button class="slider-btn plus">+</button>
-        </div>
-        <div class="tooltip">Infrastructure and construction costs</div>
-      </div>
-
-      <!-- Tax Incentives -->
-      <div class="budget-block tax">
-        <div class="block-icon"></div>
-        <div class="block-title">Tax Incentives</div>
-        <img src="img/tax.jpg" width="100" height="auto" class="main-img" />
-        <div class="slider-controls">
-          <button class="slider-btn minus">-</button>
-          <div class="slider-value">20%</div>
-          <button class="slider-btn plus">+</button>
-        </div>
-        <div class="tooltip">Tax breaks and incentives</div>
+      <div class="hud-item" data-tooltip="Budget">
+        <a href="https://x.com" target="_blank" class="sk-external-link">
+          <img
+            src="./img/btnX.png"
+            alt="External Link"
+            class="sk-external-btn"
+          />
+        </a>
+        <img src="img/budget.jpg" class="budget-img" />
+        <div class="budget-value" id="budget-value">$5.00T</div>
       </div>
     </div>
 
@@ -102,27 +123,22 @@
       </div>
     </div>
 
-    <a href="https://x.com" target="_blank" class="sk-external-link">
-      <img src="./img/btnX.png" alt="External Link" class="sk-external-btn" />
-    </a>
-
     <!-- Нижняя панель событий -->
-    <div class="events-panel">
-      <div class="hud-item" data-tooltip="Budget">
-        <img src="img/budget.jpg" class="budget-img" />
-        <div class="budget-value" id="budget-value">$5.00T</div>
-      </div>
-      <div class="event-card" data-tooltip="Financial Crisis 2008">
-        <img src="img/crisis.png" class="event-icon" />
-        <div class="event-title">Financial Crisis 2008</div>
-      </div>
-      <div class="event-card" data-tooltip="Pandemic COVID-19">
-        <img class="event-icon" src="img/pandemic.png" />
-        <div class="event-title">Pandemic COVID-19</div>
-      </div>
-      <div class="event-card" data-tooltip="Oil Price Surge">
-        <img class="event-icon" src="img/oil.png" />
-        <div class="event-title">Oil Price Surge</div>
+    <div>
+      <h2 class="event-h2">BAD EVENTS AFFECTING THE ECONOMY</h2>
+      <div class="events-panel">
+        <div class="event-card" data-tooltip="Financial Crisis 2008">
+          <img src="img/crisis.png" class="event-icon" />
+          <div class="event-title">Financial Crisis 2008</div>
+        </div>
+        <div class="event-card" data-tooltip="Pandemic COVID-19">
+          <img class="event-icon" src="img/pandemic.png" />
+          <div class="event-title">Pandemic COVID-19</div>
+        </div>
+        <div class="event-card" data-tooltip="Oil Price Surge">
+          <img class="event-icon" src="img/oil.png" />
+          <div class="event-title">Oil Price Surge</div>
+        </div>
       </div>
     </div>
 
